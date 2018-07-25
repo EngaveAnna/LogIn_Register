@@ -2,10 +2,10 @@
 
 import sqlite3
 from user_class import User
+import config_data
 
 # Creates or opens a file called mydb with a SQLite3 DB
-db = sqlite3.connect('database.db')
-
+db = config_data.db
 cursor = db.cursor()
 
 # Give data to log in maually for testing purposes

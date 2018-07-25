@@ -1,6 +1,5 @@
 # Getting data from REGON api and then printing then, finally tehy will be sent to front-end
-
-from litex.regon import REGONAPI
+import config_data
 
 # getting data from REGON and putting them into class
 class Regon:
@@ -8,8 +7,8 @@ class Regon:
     def __init__(self, nip):
 
         # data to testing environment
-        api = REGONAPI('https://wyszukiwarkaregontest.stat.gov.pl/wsBIR/UslugaBIRzewnPubl.svc')
-        api.login('abcde12345abcde12345')
+        api = config_data.regon_api_url
+        api.login(config_data.regon_api_login)
 
         entities = api.search(nip=nip)
 

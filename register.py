@@ -6,13 +6,14 @@ from user_class import User
 import mail
 import auth
 from datetime import datetime
-
+from mail_validation import mail_validation
+import config_data
+# czy to jest potrzebne czy od raz używać config.expiration na dole
 # Amount of time when the token is valid in [s]
-expiration = 1
+expiration = config_data.expiration
 
 # Creates or opens a file called mydb with a SQLite3 DB
-db = sqlite3.connect('database.db')
-
+db = config_data.db
 cursor = db.cursor()
 
 
@@ -36,6 +37,11 @@ def manual_register():
 
 # Register user
 def register_user():
+    if mail_validation(user.email):
+        pass
+    else:
+        quit()
+
     insert_user_into_table()
     
     token = auth.generate_token(user.password, user.email)
@@ -72,7 +78,7 @@ def get_data_from_REGON(nip):
 
 
 #manual_register()
-user = User("A", "H", "mail3", '8671154898', "haslo2")
+user = User("A", "H", "kajetan.dre@gmail.com", '8671154898', "haslo2")
 register_user()
 
 #get_data_from_REGON('8671154898')
